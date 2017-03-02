@@ -26,4 +26,8 @@ interface Service<T extends Serializable> {
     void deleteByIdInTransaction(Long id);
 
     List<T> getAll();
+
+    List<T> getAllLimit(int offset, int limit);
+
+    int getCount();
 }

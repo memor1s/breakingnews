@@ -1,21 +1,17 @@
 package by.belkevich.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.commons.dbcp.DataSourceConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -61,6 +57,13 @@ public class JPAConfig {
         localContainerEntityManagerFactoryBean.setDataSource(dataSource());
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter());
         localContainerEntityManagerFactoryBean.setPersistenceUnitName("entityManager"); // In persistence.xml
+        Properties p = new Properties();
+        p.put("hibernate.show_sql", "true");
+        p.put("hibernate.format_sql", "true");
+        p.put("hibernate.hbm2ddl.auto", "create"); //change this onto update to not recreate db everytime
+        p.put("hibernate.hbm2ddl.import_files", "import.sql");
+        p.put("hibernate.hbm2ddl.import_files_sql_extractor", "org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor");
+        localContainerEntityManagerFactoryBean.setJpaProperties(p);
 
         return localContainerEntityManagerFactoryBean;
     }

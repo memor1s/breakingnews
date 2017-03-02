@@ -11,9 +11,22 @@ import java.util.Date;
 @Table(name = "article")
 @NamedQueries({
         @NamedQuery(
+                name = "ARTICLE.GET_LAST",
+                query = "FROM Article AS a ORDER BY a.dateCreated DESC"
+        ),
+        @NamedQuery(
                 name = "ARTICLE.GET_BY_CATEGORYNAME",
                 query = "FROM Article AS a WHERE a.category.name = :category_name ORDER BY a.dateCreated DESC"
+        ),
+        @NamedQuery(
+                name = "ARTICLE.GET_BY_CATEGORYID",
+                query = "FROM Article AS a WHERE a.category.id = :category_id ORDER BY a.dateCreated DESC"
+        ),
+        @NamedQuery(
+                name = "ARTICLE.GET_BY_DATECREATED",
+                query = "FROM Article AS a WHERE a.dateCreated = :dateCreated ORDER BY a.dateCreated DESC"
         )}
+
 )
 public class Article extends ParentEntity {
 
@@ -28,8 +41,10 @@ public class Article extends ParentEntity {
     @Column(nullable = false, columnDefinition = "text")
     private String info;
 
+    @Column(length = 100, name = "articleimage")
+    private String articleImage;
+
     @Column(name = "datecreated",
-            nullable = false,
             updatable = false,
             insertable = false,
     columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -68,15 +83,19 @@ public class Article extends ParentEntity {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
     public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getArticleImage() {
+        return articleImage;
+    }
+
+    public void setArticleImage(String articleImage) {
+        this.articleImage = articleImage;
     }
 }

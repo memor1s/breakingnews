@@ -1,6 +1,5 @@
 package by.belkevich.repository;
 
-import javax.persistence.NamedQuery;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +22,13 @@ interface Repository <T extends Serializable, K extends Serializable> {
 
     void deleteById(K id);
 
-    List<T> getAll();
-
     int getCount();
 
+    List<T> getAll();
+
+    List<T> getAll(int offset, int limit);
+
     List<T> getAllByNamedQuery(String namedQueryName, Map<String, Object> params);
+
+    List<T> getAllByNamedQuery(String namedQueryName, Map<String, Object> params, int offset, int limit);
 }

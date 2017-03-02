@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Scope;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.io.Serializable;
 import java.util.List;
@@ -62,8 +61,18 @@ public class RepositoryJPAImpl<T extends Serializable, K extends Serializable> i
     }
 
     @Override
+    public List<T> getAll(int offset, int limit) {
+        return entityManager.createQuery("FROM " + type.getSimpleName(), type)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
+    @Override
     public int getCount() {
-        return 0;
+        return entityManager
+                .createQuery("SELECT count(t.id) FROM " + type.getSimpleName() + " t", Long.class)
+                .getSingleResult().intValue();
     }
 
     public List<T> getAllByNamedQuery(String namedQueryName, Map<String, Object> params) {
@@ -76,5 +85,17 @@ public class RepositoryJPAImpl<T extends Serializable, K extends Serializable> i
         return q.getResultList();
     }
 
+    @Override
+    public List<T> getAllByNamedQuery(String namedQueryName, Map<String, Object> params, int offset, int limit) {
+        TypedQuery<T> q = entityManager.createNamedQuery(namedQueryName, type);
 
+
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            q.setParameter(entry.getKey(), entry.getValue());
+        }
+
+        return q.setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
 }

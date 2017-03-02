@@ -10,8 +10,8 @@
         </layout>
     </appender>
 
-    <appender name="bulk" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="C:/Newsportal/logs/bulk.log"/>
+    <appender name="all" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="C:/Tomcat/BreakingNews/logs/all.log"/>
         <param name="Threshold" value="WARN" />
         <param name="Append" value="true"/>
         <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
@@ -22,7 +22,7 @@
     </appender>
 
     <appender name="application" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="C:/Newsportal/logs/application.log" />
+        <param name="File" value="C:/Tomcat/BreakingNews/logs/app.log"/>
         <param name="MaxFileSize" value="10MB" />
         <param name="MaxBackupIndex" value="10" />
         <param name="Encoding" value="UTF-8" />
@@ -32,7 +32,7 @@
     </appender>
 
     <appender name="orm" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="C:/Newsportal/logs/orm.log" />
+        <param name="File" value="C:/Tomcat/BreakingNews/logs/orm.log"/>
         <param name="Append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
         <param name="Encoding" value="UTF-8" />
@@ -41,13 +41,12 @@
         </layout>
     </appender>
 
-    <!-- Application Loggers -->
+    <!-- Loggers -->
     <logger name="net.belkevich.newsportal">
         <level value="info" />
         <appender-ref ref="application" />
     </logger>
 
-    <!-- 3rdparty Loggers -->
     <logger name="org.springframework.core">
         <level value="info" />
     </logger>

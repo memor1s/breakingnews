@@ -6,13 +6,13 @@ import by.belkevich.services.ArticlesService;
 import by.belkevich.services.CategoryService;
 import config.TestJPAConfig;
 import org.apache.log4j.Logger;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -32,6 +32,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestJPAConfig.class})
+@WebAppConfiguration
 @Transactional
 public class TestArticleService {
 
@@ -43,8 +44,8 @@ public class TestArticleService {
     @Autowired
     private CategoryService categoryService;
 
-    static Category category;
-    static Category category2;
+    private static Category category;
+    private static Category category2;
 
     @Before
     public void setUp() {

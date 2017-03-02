@@ -3,11 +3,6 @@
              xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="entityManager"
                       transaction-type="RESOURCE_LOCAL">
-        <properties>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
-        </properties>
     </persistence-unit>
 
 </persistence>

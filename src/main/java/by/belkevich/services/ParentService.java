@@ -1,12 +1,10 @@
 package by.belkevich.services;
 
 import by.belkevich.repository.RepositoryJPAImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -81,5 +79,17 @@ abstract class ParentService<T extends Serializable>  implements Service<T>{
     @Transactional
     public List<T> getAll() {
         return this.repositoryJPA.getAll();
+    }
+
+    @Override
+    @Transactional
+    public List<T> getAllLimit(int offset, int limit) {
+        return this.repositoryJPA.getAll(offset, limit);
+    }
+
+    @Override
+    @Transactional
+    public int getCount() {
+        return repositoryJPA.getCount();
     }
 }
