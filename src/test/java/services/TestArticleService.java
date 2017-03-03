@@ -57,17 +57,6 @@ public class TestArticleService {
         category2 = new Category();
         category2.setName("TestCategory");
         categoryService.add(category2);
-
-//
-//        List<String> scripts = new ArrayList<>();
-//        scripts.add("classpath:/sql/init.sql");
-//
-//        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-//        for (String sqlScript: scripts ) {
-//            Resource sqlScriptResource = new DefaultResourceLoader().getResource(sqlScript);
-//            populator.addScript(sqlScriptResource);
-//        }
-//        DatabasePopulatorUtils.execute(populator,dataSource);
     }
 
     @Test

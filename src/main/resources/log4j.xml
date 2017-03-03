@@ -72,7 +72,7 @@
     <root>
         <priority value="info" />
         <appender-ref ref="console" />
-        <appender-ref ref="bulk" />
+        <appender-ref ref="all"/>
     </root>
 
 </log4j:configuration>

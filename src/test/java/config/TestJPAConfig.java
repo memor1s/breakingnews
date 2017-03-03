@@ -1,24 +1,15 @@
 package config;
 
 import org.apache.commons.dbcp.BasicDataSource;
-import org.h2.store.Data;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.Database;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by
@@ -50,12 +41,24 @@ public class TestJPAConfig {
         dataSource.setMaxIdle(50);
         dataSource.setMaxWait(6000);
 
-//
-//        List<String> stringList = new ArrayList<>();
-//        stringList.add("")
-//        dataSource.setConnectionInitSqls(stringList);
-
         return dataSource;
     }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManager(JpaVendorAdapter hibernateJpaVendorAdapter) {
+
+        LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        localContainerEntityManagerFactoryBean.setDataSource(dataSource());
+        localContainerEntityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter);
+        localContainerEntityManagerFactoryBean.setPersistenceUnitName("entityManager"); // In persistence.xml
+        Properties p = new Properties();
+        p.put("hibernate.show_sql", "true");
+        p.put("hibernate.format_sql", "true");
+        p.put("hibernate.hbm2ddl.auto", "create"); //change this onto update to not recreate db everytime
+        localContainerEntityManagerFactoryBean.setJpaProperties(p);
+
+        return localContainerEntityManagerFactoryBean;
+    }
+
 
 }

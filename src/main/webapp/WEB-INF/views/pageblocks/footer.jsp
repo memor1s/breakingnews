@@ -57,8 +57,8 @@
         </div>
     </div>
     <div class="copy-right">
-        <p>Copyright 2017 - <a href="http://www.getbootstrap.com" target="_blank" rel="nofollow">Twitter Bootstrap</a>
-        </p>
+        <p>Copyright 2016 - <a href="http://www.365bootstrap.com" target="_blank" rel="nofollow">Bootstrap Themes</a>
+            Designed by <a href="http://www.365bootstrap.com" target="_blank" rel="nofollow">365BOOTSTRAP</a></p>
     </div>
 </footer>
 <!-- Footer -->
